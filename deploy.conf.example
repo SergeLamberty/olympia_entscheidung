@@ -1,0 +1,33 @@
+# =============================================================================
+# deploy.conf – Central configuration for install.sh, deploy.sh, and helpers
+#
+# Copy this file to deploy.conf and fill in your values:
+#   cp deploy.conf.example deploy.conf
+#
+# These defaults are used unless overridden by CLI flags.
+# deploy.conf is gitignored – your secrets stay local.
+# =============================================================================
+
+# Target server (user@host)
+SSH_HOST="root@your.server.ip"
+
+# SSH private key (leave empty to use ssh-agent / default key)
+SSH_KEY=""
+
+# Remote directory where the project will be deployed
+REMOTE_APP_DIR="/opt/wahl-check"
+
+# Project name (used for container names and labels)
+PROJECT_NAME="wahl-check"
+
+# Internal port the Next.js app listens on inside Docker
+# Also exposed on the host for direct access / debugging
+APP_PORT="8081"
+
+# Public domain name (required for HTTPS)
+# Caddy will automatically obtain a TLS certificate for this domain.
+# The DNS A record must point to your server before first run.
+DOMAIN="yourdomain.com"
+
+# Email for Caddy's ACME TLS certificate registration (Let's Encrypt)
+EMAIL="admin@yourdomain.com"

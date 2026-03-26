@@ -1,0 +1,46 @@
+{
+  "headline": "Häufige Fragen",
+  "intro": "Antworten auf häufig gestellte Fragen zum Olympia-Entscheid und zum Wahl-Check.",
+  "items": [
+    {
+      "id": "faq-1",
+      "question": "Was ist der Wahl-Check?",
+      "answer": "Der Wahl-Check ist ein unabhängiges, digitales Orientierungstool zum Ratsbürgerentscheid über die Olympia-Bewerbung in Düsseldorf. Er hilft dir, deine eigene Position zu verschiedenen Aspekten der Bewerbung zu reflektieren."
+    },
+    {
+      "id": "faq-2",
+      "question": "Was wird am 19. April 2026 entschieden?",
+      "answer": "Es wird ausschließlich darüber abgestimmt, ob Düsseldorf Teil der gemeinsamen Bewerbung der Region Rhein-Ruhr um Olympische und Paralympische Spiele werden soll. Es wird NICHT darüber entschieden, ob Olympia tatsächlich stattfindet – das entscheidet das IOC."
+    },
+    {
+      "id": "faq-3",
+      "question": "Wie werden meine Daten gespeichert?",
+      "answer": "Deine Antworten werden ausschließlich lokal in deinem Browser gespeichert (localStorage). Zusätzlich erfasst der Server anonymisiert, ob die Website aufgerufen und der Wahl-Check abgeschlossen wurde, sowie den jeweiligen Ergebnis-Score. Deine einzelnen Antworten werden nicht an den Server übertragen."
+    },
+    {
+      "id": "faq-4",
+      "question": "Kann ich den Check mehrmals machen?",
+      "answer": "Ja, du kannst deine Antworten jederzeit zurücksetzen und den Check erneut starten. Du kannst auch einzelne Antworten nachträglich ändern."
+    },
+    {
+      "id": "faq-5",
+      "question": "Wie funktioniert die Berechnung?",
+      "answer": "Jede deiner Antworten erhält einen Punktwert (von +2 für 'Dafür' bis -2 für 'Dagegen'). Dieser wird mit deiner Relevanzgewichtung multipliziert. Die Summe wird auf eine Skala von 0 bis 100 normalisiert. Details findest du auf der Methodik-Seite."
+    },
+    {
+      "id": "faq-6",
+      "question": "Ist der Check neutral?",
+      "answer": "Ja. Die Fragen decken Pro- und Contra-Argumente ausgewogen ab. Sie basieren auf realen Argumenten aus der öffentlichen Debatte und sind so formuliert, dass sie keine Richtung vorgeben."
+    },
+    {
+      "id": "faq-7",
+      "question": "Wer steckt hinter dem Projekt?",
+      "answer": "Dieses Projekt ist ein unabhängiges, ehrenamtliches Angebot von Serge Lamberty. Der Ersteller ist zwar Mitglied von Volt, die Website wurde jedoch nicht im Auftrag der Partei erstellt und widerspiegelt nicht die Meinung der Partei."
+    },
+    {
+      "id": "faq-8",
+      "question": "Wer darf beim Bürgerentscheid abstimmen?",
+      "answer": "Alle EU-Bürgerinnen und EU-Bürger, die mindestens 16 Jahre alt sind und ihren Hauptwohnsitz in Düsseldorf haben, sind stimmberechtigt."
+    }
+  ]
+}

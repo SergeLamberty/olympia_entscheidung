@@ -1,0 +1,55 @@
+{
+  "pageTitle": "Argumente aus der öffentlichen Debatte",
+  "pageIntro": "Im Vorfeld des Ratsbürgerentscheids werden von verschiedenen Seiten Argumente für und gegen die Beteiligung Düsseldorfs an der Bewerbung vorgebracht. Diese Seite stellt diese Argumente ohne Bewertung und ohne Gewichtung dar.",
+  "debateNote": "Die folgenden Argumente stammen aus der öffentlichen Debatte und spiegeln die Positionen verschiedener Akteure wider. Sie stellen keine redaktionelle Bewertung oder Empfehlung dar. Für Belege und Quellen siehe die Quellenseite.",
+  "pro": {
+    "headline": "Argumente für eine Beteiligung",
+    "arguments": [
+      {
+        "id": "pro-1",
+        "text": "Befürworter heben hervor, dass die Bewerbung auf die Nutzung vorhandener Sportstätten setzt und so Neubauten weitgehend vermieden werden sollen.",
+        "sourceRef": "Olympiabewerbung NRW"
+      },
+      {
+        "id": "pro-2",
+        "text": "Ein Teil der Kosten könnte nach Angaben der Befürworter durch Einnahmen wie Medienrechte, Sponsoring und Ticketverkäufe gedeckt werden.",
+        "sourceRef": "Olympiabewerbung NRW"
+      },
+      {
+        "id": "pro-3",
+        "text": "Vertreter der Bewerbung sehen in der regionalen Zusammenarbeit von 17 NRW-Städten eine Stärkung des Ruhrgebiets und Rheinlands als gemeinsamer Wirtschafts- und Kulturraum.",
+        "sourceRef": "Öffentliche Debatte"
+      },
+      {
+        "id": "pro-4",
+        "text": "Befürworter argumentieren, dass die internationale Sichtbarkeit der Region langfristige wirtschaftliche und touristische Effekte erzeugen könnte.",
+        "sourceRef": "Öffentliche Debatte"
+      }
+    ]
+  },
+  "contra": {
+    "headline": "Argumente gegen eine Beteiligung",
+    "arguments": [
+      {
+        "id": "con-1",
+        "text": "Kritikerinnen und Kritiker verweisen auf internationale Erfahrungen mit Olympischen Spielen, bei denen die tatsächlichen Kosten die ursprünglichen Schätzungen teils erheblich überschritten haben – zum Teil im Bereich mehrerer Milliarden Euro.",
+        "sourceRef": "Öffentliche Debatte"
+      },
+      {
+        "id": "con-2",
+        "text": "Kritiker befürchten zusätzliche Belastungen für die städtische Infrastruktur und den Wohnungsmarkt, insbesondere im Hinblick auf Verdrängung und steigende Mieten in der Region.",
+        "sourceRef": "Öffentliche Debatte"
+      },
+      {
+        "id": "con-3",
+        "text": "Der langfristige wirtschaftliche und gesellschaftliche Nutzen für die Gastgeberstädte wird von Forschern und Kommentatoren unterschiedlich eingeschätzt – positive wie negative Nachnutzungseffekte werden diskutiert.",
+        "sourceRef": "Öffentliche Debatte"
+      },
+      {
+        "id": "con-4",
+        "text": "Manche Kritiker sehen die Ressourcen besser in dringenden kommunalen Aufgaben wie Schulen, ÖPNV oder Klimaschutz investiert.",
+        "sourceRef": "Öffentliche Debatte"
+      }
+    ]
+  }
+}

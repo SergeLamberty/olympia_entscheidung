@@ -1,0 +1,42 @@
+# =============================================================================
+# Caddyfile – Reverse proxy configuration for Wahl-Check
+#
+# Variables are injected from the container environment by Docker Compose:
+#   CADDY_DOMAIN – public domain name (e.g. example.com)
+#   CADDY_EMAIL  – email for ACME / Let's Encrypt certificate registration
+#
+# Caddy automatically:
+#   - obtains and renews TLS certificates via Let's Encrypt
+#   - redirects HTTP (port 80) to HTTPS (port 443)
+# =============================================================================
+
+{
+  email {$CADDY_EMAIL}
+  # Uncomment to use Let's Encrypt staging (for testing, avoids rate limits):
+  # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+{$CADDY_DOMAIN} {
+  # Proxy all traffic to the Next.js app container (internal Docker network)
+  # The app listens on port 8081 inside its container.
+  reverse_proxy app:8081
+
+  # Compress responses
+  encode gzip
+
+  # Security headers
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options "nosniff"
+    X-Frame-Options "SAMEORIGIN"
+    Referrer-Policy "strict-origin-when-cross-origin"
+    Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    -Server
+  }
+
+  # Long-term cache for immutable static assets
+  @static {
+    path /_next/static/* /icons/* /manifest.json /sw.js /workbox-*.js
+  }
+  header @static Cache-Control "public, max-age=31536000, immutable"
+}

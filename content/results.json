@@ -1,0 +1,68 @@
+{
+  "version": "2.0",
+  "positions": [
+    {
+      "id": "pos-ja",
+      "label": "Ja-Position",
+      "shortDescription": "Befürworter sprechen sich dafür aus, dass Düsseldorf Teil der Olympia-Bewerbung wird. Sie betonen Chancen für Infrastruktur, internationale Sichtbarkeit und regionale Zusammenarbeit.",
+      "fullDescription": "Die Ja-Position sieht in der Teilnahme an der Bewerbung eine Chance, die Region Rhein/Ruhr langfristig zu stärken. Argumente sind die Nutzung vorhandener Sportstätten, potenzielle Infrastrukturgewinne und die internationale Wahrnehmung. Befürworter betonen außerdem den demokratischen Charakter des Verfahrens und die Möglichkeit, erst bei der Bewerbung detaillierte Pläne zu entwickeln.",
+      "color": "#404040",
+      "answers": {
+        "q01": "agree",
+        "q02": "neutral",
+        "q03": "agree",
+        "q04": "neutral",
+        "q05": "agree",
+        "q06": "disagree",
+        "q07": "agree",
+        "q08": "neutral",
+        "q09": "agree",
+        "q10": "neutral",
+        "q11": "agree",
+        "q12": "neutral",
+        "q13": "agree",
+        "q14": "agree",
+        "q15": "neutral",
+        "q16": "agree",
+        "q17": "agree",
+        "q18": "neutral",
+        "q19": "neutral",
+        "q20": "agree"
+      }
+    },
+    {
+      "id": "pos-nein",
+      "label": "Nein-Position",
+      "shortDescription": "Kritiker sprechen sich dagegen aus, dass Düsseldorf Teil der Olympia-Bewerbung wird. Sie betonen Kostenrisiken, ökologische Belastungen und alternative Verwendungen öffentlicher Mittel.",
+      "fullDescription": "Die Nein-Position sieht die Kostenrisiken, historischen Kostenüberschreitungen und den ungesicherten wirtschaftlichen Nutzen als entscheidende Argumente. Kritiker fordern, kommunale Mittel vorrangig für dringende Aufgaben wie Bildung, ÖPNV und Klimaschutz einzusetzen. Auch Belastungen für Wohnungsmarkt, Umwelt und Alltagsleben der Bevölkerung werden als Gegenargumente angeführt.",
+      "color": "#737373",
+      "answers": {
+        "q01": "agree",
+        "q02": "agree",
+        "q03": "neutral",
+        "q04": "agree",
+        "q05": "neutral",
+        "q06": "agree",
+        "q07": "neutral",
+        "q08": "agree",
+        "q09": "neutral",
+        "q10": "agree",
+        "q11": "neutral",
+        "q12": "agree",
+        "q13": "neutral",
+        "q14": "neutral",
+        "q15": "agree",
+        "q16": "neutral",
+        "q17": "neutral",
+        "q18": "agree",
+        "q19": "agree",
+        "q20": "neutral"
+      }
+    }
+  ],
+  "scoreLabels": {
+    "high": "Hohe Übereinstimmung",
+    "medium": "Mittlere Übereinstimmung",
+    "low": "Geringe Übereinstimmung"
+  }
+}
