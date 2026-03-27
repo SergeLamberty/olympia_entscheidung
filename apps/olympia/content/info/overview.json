@@ -1,0 +1,75 @@
+{
+  "pageTitle": "Ratsbürgerentscheid Olympia-Bewerbung",
+  "pageIntro": "Am 19. April 2026 werden die Einwohnerinnen und Einwohner Düsseldorfs zur Abstimmung aufgerufen. Diese Seite fasst die wichtigsten Fakten zur Abstimmung neutral und sachlich zusammen.",
+  "disclaimer": "Diese Seite dient der neutralen Information und stellt keine Wahlempfehlung dar. Die hier aufgeführten Informationen basieren auf offiziellen Quellen und öffentlich zugänglichen Dokumenten.",
+  "sections": [
+    {
+      "id": "grundlagen",
+      "headline": "Grundlegende Fakten",
+      "intro": "Das Wichtigste zur Abstimmung auf einen Blick.",
+      "facts": [
+        {
+          "id": "datum",
+          "label": "Abstimmungsdatum",
+          "value": "19. April 2026",
+          "sourceRef": "Stadt Düsseldorf"
+        },
+        {
+          "id": "art",
+          "label": "Art der Abstimmung",
+          "value": "Ratsbürgerentscheid – eine Form der direkten Demokratie auf kommunaler Ebene in NRW",
+          "sourceRef": "Stadt Düsseldorf"
+        },
+        {
+          "id": "frage",
+          "label": "Abstimmungsfrage",
+          "value": "Soll Düsseldorf Teil einer gemeinsamen Bewerbung der Region Rhein/Ruhr um die Austragung Olympischer und Paralympischer Spiele werden?",
+          "sourceRef": "Stadt Düsseldorf"
+        },
+        {
+          "id": "antwortformat",
+          "label": "Antwortformat",
+          "value": "Ja oder Nein (keine weiteren Optionen)",
+          "sourceRef": "Stadt Düsseldorf"
+        },
+        {
+          "id": "jahre",
+          "label": "Mögliche Austragungsjahre",
+          "value": "2036, 2040 oder 2044 – der genaue Jahrgang steht noch nicht fest",
+          "sourceRef": "Olympiabewerbung NRW"
+        },
+        {
+          "id": "reichweite",
+          "label": "Was wird entschieden",
+          "value": "Ausschließlich, ob Düsseldorf Teil der Bewerbung wird – nicht, ob Olympia tatsächlich stattfindet",
+          "sourceRef": "Stadt Düsseldorf"
+        }
+      ]
+    },
+    {
+      "id": "region",
+      "headline": "Die Bewerbungsregion",
+      "intro": "Die Bewerbung umfasst mehrere Städte in Nordrhein-Westfalen.",
+      "facts": [
+        {
+          "id": "name",
+          "label": "Name der Bewerbung",
+          "value": "Rhein-Ruhr City",
+          "sourceRef": "Olympiabewerbung NRW"
+        },
+        {
+          "id": "staedte",
+          "label": "Beteiligte Städte",
+          "value": "17 Städte in NRW, darunter Düsseldorf, Köln, Dortmund, Essen, Duisburg, Bochum, Bonn und weitere",
+          "sourceRef": "Olympiabewerbung NRW"
+        },
+        {
+          "id": "konzept",
+          "label": "Konzeptansatz",
+          "value": "Die Bewerbung setzt nach eigenen Angaben auf die Nutzung vorhandener Sportstätten und bestehender Infrastruktur",
+          "sourceRef": "Olympiabewerbung NRW"
+        }
+      ]
+    }
+  ]
+}
