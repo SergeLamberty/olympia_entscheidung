@@ -1,5 +1,6 @@
 import { loadSiteContent } from "@/lib/content-loader";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { Button } from "@/components/ui/Button";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Über das Projekt" };
@@ -15,6 +16,11 @@ export default function UeberPage() {
           {para}
         </p>
       ))}
+      <div className="mt-8">
+        <Button href="mailto:olympia@lamberty.dev" variant="secondary">
+          Feedback senden
+        </Button>
+      </div>
     </PageLayout>
   );
 }

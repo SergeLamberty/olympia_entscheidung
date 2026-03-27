@@ -6,6 +6,7 @@ import { QuizProvider } from "@/context/QuizContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
+import { PWARegistration } from "@/components/pwa/PWARegistration";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang={site.meta.locale} className={inter.variable}>
       <body className="flex flex-col min-h-dvh">
         <QuizProvider>
+          <PWARegistration />
           <AnalyticsTracker />
           <Header title={site.meta.title} navLinks={site.navigation.links} />
           {children}

@@ -50,10 +50,10 @@ function ScoreGauge({ percent }: { percent: number }) {
 }
 
 export function ResultsView({ questionsContent }: ResultsViewProps) {
-  const { answers, relevances, completed, resetQuiz } = useQuiz();
+  const { answers, relevances, completed, completedAt, resetQuiz } = useQuiz();
   const router = useRouter();
   const [result, setResult] = useState<QuizResult | null>(null);
-  const lastReportedScore = useRef<number | null>(null);
+  const lastReportedCompletion = useRef<string | null>(null);
 
   useEffect(() => {
     if (!completed) {
@@ -65,14 +65,29 @@ export function ResultsView({ questionsContent }: ResultsViewProps) {
   }, [completed, answers, relevances, questionsContent, router]);
 
   useEffect(() => {
-    if (!result) return;
+    if (!result || !completedAt) return;
 
-    const score = result.breakdown.normalizedPercent;
-    if (lastReportedScore.current === score) return;
+    if (lastReportedCompletion.current === completedAt) return;
 
-    lastReportedScore.current = score;
-    sendAnalyticsEvent({ type: "complete", score });
-  }, [result]);
+    const storageKey = `olympia-analytics-complete:${completedAt}`;
+    try {
+      if (window.localStorage.getItem(storageKey) === "1") {
+        lastReportedCompletion.current = completedAt;
+        return;
+      }
+    } catch {
+      // Best-effort client deduplication only.
+    }
+
+    lastReportedCompletion.current = completedAt;
+    try {
+      window.localStorage.setItem(storageKey, "1");
+    } catch {
+      // Best-effort client deduplication only.
+    }
+
+    sendAnalyticsEvent({ type: "complete", score: result.breakdown.normalizedPercent });
+  }, [result, completedAt]);
 
   if (!result) {
     return (

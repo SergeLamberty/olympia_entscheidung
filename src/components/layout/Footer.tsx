@@ -13,6 +13,10 @@ export function Footer({ copyright, links }: FooterProps) {
         <p className="text-sm text-neutral-500 mb-4">
           Ein unabhängiges Orientierungstool zum Ratsbürgerentscheid Olympia-Bewerbung Düsseldorf.
         </p>
+        <p className="text-sm text-neutral-500 mb-4">
+          Inhalte wurden teilweise mit KI-Unterstützung erstellt und anschließend von Menschen
+          geprüft.
+        </p>
         <nav className="flex flex-wrap gap-x-6 gap-y-2 mb-5" aria-label="Footer Navigation">
           {links.map((link) => (
             <Link

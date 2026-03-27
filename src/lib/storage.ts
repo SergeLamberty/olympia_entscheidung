@@ -42,7 +42,7 @@ export function loadState(): StoredState {
       relevances: parsed.relevances ?? {},
       currentQuestion: parsed.currentQuestion ?? 0,
       completed: parsed.completed ?? false,
-      completedAt: parsed.completedAt,
+      completedAt: typeof parsed.completedAt === "string" ? parsed.completedAt : undefined,
     };
   } catch {
     return { ...DEFAULT_STATE };

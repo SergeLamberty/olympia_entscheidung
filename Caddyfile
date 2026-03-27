@@ -31,12 +31,21 @@
     X-Frame-Options "SAMEORIGIN"
     Referrer-Policy "strict-origin-when-cross-origin"
     Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data: blob: https:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests"
     -Server
   }
 
+  @analytics path /api/analytics
+  header @analytics Cache-Control "no-store, max-age=0"
+
+  @pwaMutable {
+    path /manifest.json /sw.js
+  }
+  header @pwaMutable Cache-Control "public, max-age=0, must-revalidate"
+
   # Long-term cache for immutable static assets
   @static {
-    path /_next/static/* /icons/* /manifest.json /sw.js /workbox-*.js
+    path /_next/static/* /icons/*
   }
   header @static Cache-Control "public, max-age=31536000, immutable"
 }

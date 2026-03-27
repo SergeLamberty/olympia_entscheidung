@@ -113,7 +113,7 @@ install_docker() {
 #   80   – HTTP (Caddy uses this for ACME challenge + redirect to HTTPS)
 #   443  – HTTPS (public access)
 #   443/udp – HTTP/3 QUIC
-#   $APP_PORT – Direct app access on host (for debugging / monitoring)
+#   $APP_PORT – Localhost-only app access on host (for health checks / admin debugging)
 configure_firewall() {
   log "Configuring UFW firewall..."
 
@@ -127,11 +127,9 @@ configure_firewall() {
   ufw allow 80/tcp    comment 'HTTP (ACME + redirect)'
   ufw allow 443/tcp   comment 'HTTPS'
   ufw allow 443/udp   comment 'HTTPS/QUIC'
-  ufw allow "${APP_PORT}/tcp" comment "App direct access (port ${APP_PORT}, debug)"
-
   ufw --force enable
 
-  ok "UFW active. Open ports: 22, 80, 443, ${APP_PORT}"
+  ok "UFW active. Open ports: 22, 80, 443"
 }
 
 # ── 4. Generate .env ──────────────────────────────────────────────────────────
@@ -149,6 +147,7 @@ DOMAIN=${DOMAIN}
 EMAIL=${EMAIL}
 APP_PORT=${APP_PORT}
 PROJECT_NAME=${PROJECT_NAME}
+INTERNAL_STATS_ENABLED=false
 
 # Passed to the Next.js app container
 NEXT_PUBLIC_APP_URL=https://${DOMAIN}
@@ -277,7 +276,7 @@ main() {
 
   echo ""
   ok "=== Remote setup complete ==="
-  log "  Direct access : http://$(hostname -I | awk '{print $1}'):${APP_PORT}"
+  log "  Server-local app check : http://localhost:${APP_PORT}"
   log "  HTTPS (Caddy) : https://${DOMAIN}"
   log "  TLS cert      : provisioned automatically by Caddy (allow ~60s)"
   log "  Logs          : docker compose -f ${APP_DIR}/docker-compose.yml logs -f"

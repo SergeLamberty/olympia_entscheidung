@@ -98,13 +98,7 @@ async function withStoreLock<T>(mutate: (store: AnalyticsStore) => Promise<T> | 
 export async function trackVisit(visitorId: string) {
   await withStoreLock((store) => {
     const now = new Date().toISOString();
-    const existing = store.uniqueVisitors[visitorId];
-
-    if (existing) {
-      existing.lastSeenAt = now;
-      existing.visits += 1;
-      return;
-    }
+    if (store.uniqueVisitors[visitorId]) return;
 
     store.uniqueVisitors[visitorId] = {
       firstSeenAt: now,
@@ -124,8 +118,6 @@ export async function trackCompletion(visitorId: string, score: number) {
         lastSeenAt: now,
         visits: 1,
       };
-    } else {
-      store.uniqueVisitors[visitorId].lastSeenAt = now;
     }
 
     store.completedVisitors[visitorId] = {

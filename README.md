@@ -9,7 +9,7 @@ Built for the **Ratsbürgerentscheid Düsseldorf – Olympia-Bewerbung Rhein-Ruh
 - **Content-driven app** – editorial content comes from local JSON files in `/content/`
 - **PWA** – installable, works offline after first visit
 - **Local answer storage** – quiz answers stay in browser `localStorage`
-- **Lightweight server analytics** – counts unique visitors, completed runs, and average score via an internal API and a host-mounted `/data` directory
+- **Lightweight server analytics** – counts unique visitors, completed runs, and average score via a throttled internal API and a host-mounted `/data` directory
 - **Mobile-first** – optimised for phones, accessible on all screen sizes
 - **Neutral information section** – factual overview of the referendum at `/info`
 
@@ -19,7 +19,7 @@ Built for the **Ratsbürgerentscheid Düsseldorf – Olympia-Bewerbung Rhein-Ruh
 |---|---|
 | Framework | Next.js 14+ (App Router, TypeScript) |
 | Styling | Tailwind CSS |
-| PWA | next-pwa (Workbox) |
+| PWA | Static manifest + lightweight custom service worker |
 | State | React Context + localStorage |
 | Analytics | Next.js route handler + JSON file in `/data` |
 | Deployment | Docker + Caddy (automatic HTTPS) |
@@ -33,7 +33,7 @@ Built for the **Ratsbürgerentscheid Düsseldorf – Olympia-Bewerbung Rhein-Ruh
 # Install dependencies
 npm install
 
-# Start dev server (PWA service worker disabled in dev)
+# Start dev server
 npm run dev
 ```
 
@@ -71,8 +71,8 @@ Internet
                                          Next.js container
                                          (listens on :8081)
                                               │
-                                        :8081 exposed on host
-                                        (for direct access / debugging)
+                                        :8081 bound to localhost
+                                        (for health checks / admin access)
 ```
 
 **Port summary:**
@@ -82,7 +82,7 @@ Internet
 | 22 | inbound | SSH (admin access) |
 | 80 | inbound | HTTP → HTTPS redirect + ACME challenge |
 | 443 | inbound | HTTPS (public access) |
-| 8081 | inbound | Direct app access (debug / monitoring) |
+| 8081 | localhost only | Direct app access (admin / monitoring) |
 | 8081 | internal | App container listens here |
 
 Caddy obtains and renews TLS certificates automatically via Let's Encrypt.
@@ -118,7 +118,7 @@ SSH_HOST="root@your-server"       # Target server
 SSH_KEY=""                        # Path to SSH key (empty = use ssh-agent)
 REMOTE_APP_DIR="/opt/wahl-check"  # Where the app lives on the server
 PROJECT_NAME="wahl-check"         # Container name prefix
-APP_PORT="8081"                   # Internal port (app + host-exposed)
+APP_PORT="8081"                   # Internal port (localhost-only on the server host)
 DOMAIN="yourdomain.com"           # Public domain (must have DNS set up)
 EMAIL="admin@yourdomain.com"      # For Let's Encrypt certificate
 ```
@@ -154,7 +154,7 @@ make setup
    - Configure UFW firewall
    - Generate `/opt/wahl-check/.env` automatically (no manual step)   - Build Docker image and start all containers
    - Install a systemd service for auto-restart on reboot
-5. Verify the app responds on port 8081
+5. Verify the app responds on localhost port 8081
 
 **No `.env` file needs to be created manually.** `install.sh` generates it on the server.
 
@@ -183,7 +183,8 @@ Tracked values:
 - completed quiz runs
 - average result score
 
-The internal statistics page is available at `/intern/statistik` and is marked `noindex`.
+The internal statistics page at `/intern/statistik` is disabled by default. To enable it intentionally, set `INTERNAL_STATS_ENABLED=true` in the server `.env` before restarting the app.
+Analytics requests are rate-limited and accepted only from the same site origin.
 
 ---
 
@@ -262,8 +263,9 @@ To update code:
 ### PWA
 
 - The app is installable as a PWA on Android and iOS
-- Offline support for static assets via Workbox service worker
-- Service worker is disabled in `npm run dev` (enabled in production build only)
+- Offline support for core static assets via a lightweight custom service worker
+- Service worker registration runs only in production
+- Service worker file is at `/public/sw.js`
 - Manifest is at `/public/manifest.json`
 - Icons are at `/public/icons/` – replace with your own 192×192 and 512×512 PNG files
 
@@ -304,7 +306,7 @@ ssh root@your-server "cd /opt/wahl-check && docker compose down -v"
 |---|---|
 | **Next.js standalone output** | Smaller Docker image; no `node_modules` needed at runtime |
 | **Caddy over Nginx** | Automatic TLS renewal, single config file, no certbot needed |
-| **App on port 8081** | Avoids conflict with system services on 3000/8080; host-exposed for monitoring |
+| **App on port 8081** | Avoids conflict with system services on 3000/8080; bound to localhost so public traffic still has to pass through Caddy |
 | **Content as mounted volume** | Content updates don't require container rebuild |
 | **No database server** | Content is static JSON; quiz answers stay in browser localStorage; analytics are persisted as a small JSON file in `/data` |
 | **`deploy.conf` over `.env`** | Single source of truth for both local scripts and documentation; `.env` is generated server-side; `deploy.conf` is gitignored |

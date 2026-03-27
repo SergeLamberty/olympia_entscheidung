@@ -10,6 +10,7 @@ interface QuizContextValue {
   relevances: UserRelevances;
   currentQuestion: number;
   completed: boolean;
+  completedAt?: string;
   setAnswer: (questionId: string, answer: AnswerValue) => void;
   setRelevance: (questionId: string, relevance: RelevanceValue) => void;
   setCurrentQuestion: (index: number) => void;
@@ -24,6 +25,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
   const [relevances, setRelevances] = useState<UserRelevances>({});
   const [currentQuestion, setCurrentQuestionState] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [completedAt, setCompletedAt] = useState<string | undefined>(undefined);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -32,13 +34,14 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     setRelevances(stored.relevances);
     setCurrentQuestionState(stored.currentQuestion);
     setCompleted(stored.completed);
+    setCompletedAt(stored.completedAt);
     setHydrated(true);
   }, []);
 
   useEffect(() => {
     if (!hydrated) return;
-    saveState({ answers, relevances, currentQuestion, completed });
-  }, [answers, relevances, currentQuestion, completed, hydrated]);
+    saveState({ answers, relevances, currentQuestion, completed, completedAt });
+  }, [answers, relevances, currentQuestion, completed, completedAt, hydrated]);
 
   const setAnswer = useCallback((questionId: string, answer: AnswerValue) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
@@ -52,7 +55,10 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     setCurrentQuestionState(index);
   }, []);
 
-  const markCompleted = useCallback(() => setCompleted(true), []);
+  const markCompleted = useCallback(() => {
+    setCompleted(true);
+    setCompletedAt(new Date().toISOString());
+  }, []);
 
   const resetQuiz = useCallback(() => {
     clearState();
@@ -60,6 +66,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     setRelevances({});
     setCurrentQuestionState(0);
     setCompleted(false);
+    setCompletedAt(undefined);
   }, []);
 
   return (
@@ -69,6 +76,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
         relevances,
         currentQuestion,
         completed,
+        completedAt,
         setAnswer,
         setRelevance,
         setCurrentQuestion,
