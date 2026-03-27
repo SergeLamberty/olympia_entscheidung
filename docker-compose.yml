@@ -22,7 +22,7 @@ services:
       - INTERNAL_STATS_ENABLED=${INTERNAL_STATS_ENABLED:-false}
     volumes:
       # Content files are mounted read-only so they can be updated without rebuild
-      - ./content:/app/content:ro
+      - ./apps/olympia/content:/app/content:ro
       - /data:/data
     ports:
       # Bound to localhost only. Public traffic goes through Caddy on 443.

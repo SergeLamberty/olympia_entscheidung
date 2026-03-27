@@ -202,7 +202,7 @@ verify_deployment() {
 # ── Local tests ──────────────────────────────────────────────────────────────
 run_local_tests() {
   log "Running local tests before deployment..."
-  if npm test 2>&1 | tail -20; then
+  if pnpm test 2>&1 | tail -20; then
     ok "All tests passed"
   else
     err "Tests failed. Fix test failures before deploying."
