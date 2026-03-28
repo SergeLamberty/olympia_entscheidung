@@ -4,14 +4,17 @@ node_modules
 .pnp.js
 
 # Testing
-/coverage
+coverage
 
 # Next.js
-/.next/
-/out/
+.next/
+out/
+
+# Vite / Build output
+dist/
 
 # Production
-/build
+build
 
 # Misc
 .DS_Store
@@ -21,6 +24,7 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Local env files
 .env*.local
@@ -37,6 +41,10 @@ deploy.conf
 *.tsbuildinfo
 next-env.d.ts
 
-# PWA
-public/sw.js
-public/workbox-*.js
+# PWA (generated files)
+**/public/sw.js
+**/public/workbox-*.js
+
+# IDE
+.idea/
+.vscode/

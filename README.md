@@ -1,60 +1,70 @@
-# Wahl-Check
+# Olympia Düsseldorf Monorepo
 
-A mobile-first Progressive Web App (PWA) for German municipal election guidance. Users answer theses about local policy positions and see which position matches their views best.
+A monorepo containing web applications for the **Ratsbürgerentscheid Düsseldorf – Olympia-Bewerbung Rhein-Ruhr 2026**.
 
-Built for the **Ratsbürgerentscheid Düsseldorf – Olympia-Bewerbung Rhein-Ruhr 2026**.
+## Apps
 
-## Features
-
-- **Content-driven app** – editorial content comes from local JSON files in `/content/`
-- **PWA** – installable, works offline after first visit
-- **Local answer storage** – quiz answers stay in browser `localStorage`
-- **Lightweight server analytics** – counts unique visitors, completed runs, and average score via an internal API and a host-mounted `/data` directory
-- **Mobile-first** – optimised for phones, accessible on all screen sizes
-- **Neutral information section** – factual overview of the referendum at `/info`
+| App | Description | Tech |
+|-----|-------------|------|
+| **[olympia](apps/olympia)** | Wahl-Check PWA – quiz to match user views with positions | Next.js 14, TypeScript |
+| **[info](apps/info)** | Information site about the referendum | Vite, React |
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 14+ (App Router, TypeScript) |
+| Monorepo | pnpm workspaces |
+| Olympia App | Next.js 14+ (App Router, TypeScript), PWA |
+| Info App | Vite, React |
 | Styling | Tailwind CSS |
-| PWA | next-pwa (Workbox) |
-| State | React Context + localStorage |
-| Analytics | Next.js route handler + JSON file in `/data` |
 | Deployment | Docker + Caddy (automatic HTTPS) |
-| Node | LTS 20 |
+| Node | LTS 20+ |
 
 ---
 
 ## Local Development
 
 ```bash
-# Install dependencies
-npm install
+# Install dependencies (uses pnpm)
+pnpm install
 
-# Start dev server (PWA service worker disabled in dev)
-npm run dev
+# Start all apps in parallel
+pnpm dev
+
+# Start individual apps
+pnpm dev:olympia    # Olympia quiz app (http://localhost:3000)
+pnpm dev:info       # Info site (http://localhost:5173)
 ```
-
-Open [http://localhost:3000](http://localhost:3000).
 
 ## Build
 
 ```bash
-npm run build
-npm run start
+# Build all apps
+pnpm build
+
+# Build individual apps
+pnpm build:olympia
+pnpm build:info
 ```
 
 ## Type Checking & Linting
 
 ```bash
-npm run type-check
-npm run lint
-npm run format
+pnpm type-check     # Type check all apps
+pnpm lint           # Lint all apps
+pnpm format         # Format all files
+pnpm format:check   # Check formatting
 ```
 
-Note: `npm run type-check` currently fails because the Jest test files are included without Jest globals in `tsconfig.json`. `npm run build` is the more reliable validation step for the app at the moment.
+## CI/CD
+
+GitHub Actions workflows are located in `.github/workflows/`:
+
+| Workflow | Trigger | Steps |
+|----------|---------|-------|
+| `ci.yml` | Push/PR to main | Lint → Type check → Test → Build → Docker build |
+
+The CI pipeline validates all apps and builds a test Docker image to catch issues early.
 
 ---
 
@@ -71,8 +81,8 @@ Internet
                                          Next.js container
                                          (listens on :8081)
                                               │
-                                        :8081 exposed on host
-                                        (for direct access / debugging)
+                                        :8081 bound to localhost
+                                        (for health checks / admin access)
 ```
 
 **Port summary:**
@@ -82,7 +92,7 @@ Internet
 | 22 | inbound | SSH (admin access) |
 | 80 | inbound | HTTP → HTTPS redirect + ACME challenge |
 | 443 | inbound | HTTPS (public access) |
-| 8081 | inbound | Direct app access (debug / monitoring) |
+| 8081 | localhost only | Direct app access (admin / monitoring) |
 | 8081 | internal | App container listens here |
 
 Caddy obtains and renews TLS certificates automatically via Let's Encrypt.
@@ -118,7 +128,7 @@ SSH_HOST="root@your-server"       # Target server
 SSH_KEY=""                        # Path to SSH key (empty = use ssh-agent)
 REMOTE_APP_DIR="/opt/wahl-check"  # Where the app lives on the server
 PROJECT_NAME="wahl-check"         # Container name prefix
-APP_PORT="8081"                   # Internal port (app + host-exposed)
+APP_PORT="8081"                   # Internal port (localhost-only on the server host)
 DOMAIN="yourdomain.com"           # Public domain (must have DNS set up)
 EMAIL="admin@yourdomain.com"      # For Let's Encrypt certificate
 ```
@@ -154,7 +164,7 @@ make setup
    - Configure UFW firewall
    - Generate `/opt/wahl-check/.env` automatically (no manual step)   - Build Docker image and start all containers
    - Install a systemd service for auto-restart on reboot
-5. Verify the app responds on port 8081
+5. Verify the app responds on localhost port 8081
 
 **No `.env` file needs to be created manually.** `install.sh` generates it on the server.
 
@@ -183,7 +193,8 @@ Tracked values:
 - completed quiz runs
 - average result score
 
-The internal statistics page is available at `/intern/statistik` and is marked `noindex`.
+The internal statistics page at `/intern/statistik` is disabled by default. To enable it intentionally, set `INTERNAL_STATS_ENABLED=true` in the server `.env` before restarting the app.
+Analytics requests are rate-limited and accepted only from the same site origin.
 
 ---
 
@@ -230,9 +241,9 @@ ssh root@your-server "systemctl status wahl-check"
 
 ---
 
-### Updating Content
+### Updating Content (Olympia App)
 
-All content lives in `/content/` and is mounted read-only into the container:
+All content lives in `apps/olympia/content/` and is mounted read-only into the container:
 
 | File | What to edit |
 |---|---|
@@ -248,7 +259,7 @@ All content lives in `/content/` and is mounted read-only into the container:
 
 To update content without rebuilding the container:
 ```bash
-rsync -az content/ root@your-server:/opt/wahl-check/content/
+rsync -az apps/olympia/content/ root@your-server:/opt/wahl-check/content/
 # No container restart needed (content is mounted live)
 ```
 
@@ -262,8 +273,9 @@ To update code:
 ### PWA
 
 - The app is installable as a PWA on Android and iOS
-- Offline support for static assets via Workbox service worker
-- Service worker is disabled in `npm run dev` (enabled in production build only)
+- Offline support for core static assets via a lightweight custom service worker
+- Service worker registration runs only in production
+- Service worker file is at `/public/sw.js`
 - Manifest is at `/public/manifest.json`
 - Icons are at `/public/icons/` – replace with your own 192×192 and 512×512 PNG files
 
@@ -302,9 +314,11 @@ ssh root@your-server "cd /opt/wahl-check && docker compose down -v"
 
 | Decision | Rationale |
 |---|---|
+| **pnpm workspaces** | Efficient monorepo management with shared dependencies |
 | **Next.js standalone output** | Smaller Docker image; no `node_modules` needed at runtime |
+| **Vite for info app** | Fast, lightweight build for static info site |
 | **Caddy over Nginx** | Automatic TLS renewal, single config file, no certbot needed |
-| **App on port 8081** | Avoids conflict with system services on 3000/8080; host-exposed for monitoring |
+| **App on port 8081** | Avoids conflict with system services on 3000/8080; bound to localhost so public traffic still has to pass through Caddy |
 | **Content as mounted volume** | Content updates don't require container rebuild |
 | **No database server** | Content is static JSON; quiz answers stay in browser localStorage; analytics are persisted as a small JSON file in `/data` |
 | **`deploy.conf` over `.env`** | Single source of truth for both local scripts and documentation; `.env` is generated server-side; `deploy.conf` is gitignored |
@@ -316,33 +330,37 @@ ssh root@your-server "cd /opt/wahl-check && docker compose down -v"
 
 ```
 .
-├── content/              # All editable content (JSON)
-│   ├── site.json
-│   ├── questions.json
-│   ├── results.json
-│   ├── faq.json
-│   └── info/
-│       ├── overview.json
-│       ├── process.json
-│       ├── arguments.json
-│       ├── faq.json
-│       └── sources.json
-├── src/
-│   ├── app/              # Next.js pages (App Router)
-│   ├── components/       # UI + layout + feature components
-│   ├── context/          # QuizContext (React state)
-│   ├── lib/              # content-loader, info-loader, storage, matching, analytics
-│   └── types/            # TypeScript types
-├── public/               # Static assets, manifest, PWA icons
+├── apps/
+│   ├── olympia/              # Wahl-Check PWA (Next.js)
+│   │   ├── content/          # All editable content (JSON)
+│   │   │   ├── site.json
+│   │   │   ├── questions.json
+│   │   │   ├── results.json
+│   │   │   ├── faq.json
+│   │   │   └── info/
+│   │   ├── src/
+│   │   │   ├── app/          # Next.js pages (App Router)
+│   │   │   ├── components/   # UI + layout + feature components
+│   │   │   ├── context/      # QuizContext (React state)
+│   │   │   ├── lib/          # content-loader, storage, matching, analytics
+│   │   │   └── types/        # TypeScript types
+│   │   └── public/           # Static assets, manifest, PWA icons
+│   │
+│   └── info/                 # Info site (Vite + React)
+│       └── src/              # React components
+│
+├── packages/                 # Shared packages (future)
+│
 ├── scripts/
-│   └── remote-setup.sh   # Runs on server (called by install.sh)
-├── deploy.conf.example   # Deployment configuration template (copy to deploy.conf)
-├── install.sh            # First-time server setup (run locally)
-├── deploy.sh             # Push updates (run locally)
-├── status.sh             # Check server status (run locally)
-├── logs.sh               # Stream server logs (run locally)
-├── Dockerfile            # Multi-stage Docker build
-├── docker-compose.yml    # App + Caddy services
-├── Caddyfile             # Reverse proxy + TLS config
-└── Makefile              # Convenience targets
+│   └── remote-setup.sh       # Runs on server (called by install.sh)
+├── deploy.conf.example       # Deployment configuration template
+├── install.sh                # First-time server setup (run locally)
+├── deploy.sh                 # Push updates (run locally)
+├── status.sh                 # Check server status (run locally)
+├── logs.sh                   # Stream server logs (run locally)
+├── Dockerfile                # Multi-stage Docker build
+├── docker-compose.yml        # App + Caddy services
+├── Caddyfile                 # Reverse proxy + TLS config
+├── Makefile                  # Convenience targets
+└── pnpm-workspace.yaml       # Workspace configuration
 ```

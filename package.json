@@ -1,44 +1,27 @@
 {
-  "name": "wahl-check",
-  "version": "0.1.0",
+  "name": "olympia-workspace",
+  "version": "1.0.0",
   "private": true,
+  "description": "Monorepo für Olympia Düsseldorf Projekte",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start -p 3000",
-    "lint": "next lint",
+    "dev": "pnpm --parallel --filter \"./apps/**\" dev",
+    "dev:info": "pnpm --filter info dev",
+    "dev:olympia": "pnpm --filter olympia dev",
+    "build": "pnpm --filter \"./apps/**\" build",
+    "build:info": "pnpm --filter info build",
+    "build:olympia": "pnpm --filter olympia build",
+    "lint": "pnpm --filter \"./apps/**\" lint",
+    "type-check": "pnpm --filter \"./apps/**\" type-check",
+    "test": "pnpm --filter \"./apps/**\" test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "type-check": "tsc --noEmit",
-    "test": "jest --passWithNoTests",
-    "check:safety": "bash scripts/check_website_safety.sh",
-    "check:seo": "bash scripts/check_website_seo.sh"
-  },
-  "dependencies": {
-    "@next/bundle-analyzer": "^14.2.5",
-    "next": "14.2.5",
-    "next-pwa": "^5.6.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "clean": "pnpm --filter \"./apps/**\" clean"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@types/jest": "^30.0.0",
-    "@types/node": "^20.14.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.19",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
-    "eslint-config-prettier": "^9.1.0",
-    "jest": "^30.3.0",
-    "jest-environment-jsdom": "^30.3.0",
-    "postcss": "^8.4.38",
-    "prettier": "^3.3.2",
-    "tailwindcss": "^3.4.4",
-    "ts-jest": "^29.4.6",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.2"
+    "prettier": "^3.3.2"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
   }
 }

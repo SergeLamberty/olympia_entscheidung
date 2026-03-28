@@ -1,17 +1,28 @@
 FROM node:20-alpine AS base
 
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+
+# Copy workspace config
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
+COPY apps/olympia/package.json ./apps/olympia/
+
+# Install dependencies for olympia app only
+RUN pnpm install --frozen-lockfile --filter olympia
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+COPY --from=deps /app/apps/olympia/node_modules ./apps/olympia/node_modules
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json ./
+COPY apps/olympia ./apps/olympia
 ENV NEXT_TELEMETRY_DISABLED 1
-RUN npm run build
+WORKDIR /app/apps/olympia
+RUN pnpm build
 
 FROM base AS runner
 WORKDIR /app
@@ -23,10 +34,10 @@ RUN adduser --system --uid 1001 nextjs
 RUN apk add --no-cache wget
 RUN mkdir -p /data && chown nextjs:nodejs /data
 
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder /app/content ./content
+COPY --from=builder /app/apps/olympia/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/olympia/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/olympia/.next/static ./.next/static
+COPY --from=builder /app/apps/olympia/content ./content
 
 USER nextjs
 # PORT is set via docker-compose environment (default 8081 in production)

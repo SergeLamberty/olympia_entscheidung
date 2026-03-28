@@ -100,7 +100,7 @@ validate_config() {
   log "  SSH target   : $SSH_HOST"
   log "  Remote dir   : $REMOTE_APP_DIR"
   log "  Domain       : $DOMAIN"
-  log "  App port     : $APP_PORT (internal + host-exposed)"
+  log "  App port     : $APP_PORT (internal + localhost-only host binding)"
   log "  Public access: https://$DOMAIN (HTTPS via Caddy)"
 }
 
@@ -179,12 +179,12 @@ run_remote_setup() {
 
 # ── Step 5: Verify deployment ─────────────────────────────────────────────────
 verify_deployment() {
-  log "Verifying app is reachable on port $APP_PORT ..."
+  log "Verifying app is reachable on localhost:$APP_PORT ..."
   local max=12 attempt=0
 
   while [[ $attempt -lt $max ]]; do
     if ssh_run "curl -sf http://localhost:$APP_PORT > /dev/null 2>&1"; then
-      ok "App is responding on http://$SSH_HOST:$APP_PORT"
+      ok "App is responding on http://localhost:$APP_PORT (via SSH check)"
       break
     fi
     attempt=$((attempt + 1))
@@ -202,7 +202,7 @@ verify_deployment() {
 # ── Local tests ──────────────────────────────────────────────────────────────
 run_local_tests() {
   log "Running local tests before deployment..."
-  if npm test 2>&1 | tail -20; then
+  if pnpm test 2>&1 | tail -20; then
     ok "All tests passed"
   else
     err "Tests failed. Fix test failures before deploying."
@@ -232,7 +232,7 @@ main() {
   echo -e "${GREEN}═══════════════════════════════════════════════════════${NC}"
   echo ""
   echo -e "  HTTPS (public): ${CYAN}https://$DOMAIN${NC}"
-  echo -e "  Direct (debug): ${CYAN}http://$SSH_HOST:$APP_PORT${NC}"
+  echo -e "  Direct (server-local): ${CYAN}http://localhost:$APP_PORT${NC}"
   echo ""
   echo -e "  Logs   : ${YELLOW}./logs.sh${NC}"
   echo -e "  Status : ${YELLOW}./status.sh${NC}"
