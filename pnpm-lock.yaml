@@ -3119,7 +3119,6 @@ packages:
         integrity: sha512-NP9APE+tO+LuJGn7/9+cohklunJsXWiaWEfV3si4Gi/XHDwVNgkwr1J3RQYFIvPy76GmJ9/bW8vyoU1LcxwKHA==,
       }
     engines: { node: ^10 || ^12 || >=14 }
-    hasBin: true
     peerDependencies:
       postcss: ^8.1.0
 
@@ -3929,7 +3928,6 @@ packages:
       {
         integrity: sha512-iI1f+D2ViGn+uvv5HuHVUamg8ll4tN+JRHGc6IJi4TP9Kl976C57fzPXgseXNs8v0iA8aSJpHsTWjDb9QJamGQ==,
       }
-    hasBin: true
     peerDependencies:
       eslint: ">=7.0.0"
 
@@ -5012,7 +5010,6 @@ packages:
         integrity: sha512-l6Tqx+j1fDXJEW5bqYykDQQ7mQg+9mhWXtnj+tQZrTWYHyHoi6Be8HPumDSA+UiX2/2buEgjA58iJzdj146uCw==,
       }
     engines: { node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0 }
-    hasBin: true
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
@@ -5214,7 +5211,6 @@ packages:
         integrity: sha512-AkXIIFcaazymvey2i/+F94XRnM6TsVLZDhBMLsd1Sf/W0wzsvvpjeyUrCZD6HGG4SDYPgDJDBKeiJTBb10WzMg==,
       }
     engines: { node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0 }
-    hasBin: true
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
@@ -5656,7 +5652,6 @@ packages:
         integrity: sha512-i6AJdyVa4oQjyvX/6GeER8dpY/xlIV+4NMv/svykcLtURJSy/WzDnnUk/TM4d0uewFHK7xSQz4TbIwPgjky+3A==,
       }
     engines: { node: ">=20.9.0" }
-    hasBin: true
     peerDependencies:
       "@opentelemetry/api": ^1.1.0
       "@playwright/test": ^1.51.1
@@ -6937,7 +6932,6 @@ packages:
         integrity: sha512-fSpWtOO/1AjSNQguk43hb/JCo16oJDnMJf3CdEGNkqsEX3t0KX96xvyX1D7PfLCpVoKu4MfVrqUkFyblYoY4lA==,
       }
     engines: { node: ^14.15.0 || ^16.10.0 || ^18.0.0 || >=20.0.0 }
-    hasBin: true
     peerDependencies:
       "@babel/core": ">=7.0.0-beta.0 <8"
       "@jest/transform": ^29.0.0 || ^30.0.0
@@ -6966,7 +6960,6 @@ packages:
       {
         integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==,
       }
-    hasBin: true
     peerDependencies:
       "@swc/core": ">=1.2.50"
       "@swc/wasm": ">=1.2.50"
@@ -7157,7 +7150,6 @@ packages:
       {
         integrity: sha512-Js0m9cx+qOgDxo0eMiFGEueWztz+d4+M3rGlmKPT+T4IS/jP4ylw3Nwpu6cpTTP8R1MAC1kF4VbdLt3ARf209w==,
       }
-    hasBin: true
     peerDependencies:
       browserslist: ">= 4.21.0"
 
@@ -7192,7 +7184,6 @@ packages:
         integrity: sha512-o5a9xKjbtuhY6Bi5S3+HvbRERmouabWbyUcpXXUA1u+GNUKoROi9byOJ8M0nHbHYHkYICiMlqxkg1KkYmm25Sw==,
       }
     engines: { node: ^18.0.0 || >=20.0.0 }
-    hasBin: true
     peerDependencies:
       "@types/node": ^18.0.0 || >=20.0.0
       less: "*"
