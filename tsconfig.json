@@ -14,9 +14,7 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "references": [
-    { "path": "./apps/olympia" }
-  ],
+  "references": [{ "path": "./apps/olympia" }],
   "include": [],
   "exclude": ["node_modules", "apps/*/node_modules"]
 }

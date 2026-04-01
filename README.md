@@ -4,21 +4,21 @@ A monorepo containing web applications for the **Ratsbürgerentscheid Düsseldor
 
 ## Apps
 
-| App | Description | Tech |
-|-----|-------------|------|
+| App                         | Description                                              | Tech                   |
+| --------------------------- | -------------------------------------------------------- | ---------------------- |
 | **[olympia](apps/olympia)** | Wahl-Check PWA – quiz to match user views with positions | Next.js 14, TypeScript |
-| **[info](apps/info)** | Information site about the referendum | Vite, React |
+| **[info](apps/info)**       | Information site about the referendum                    | Vite, React            |
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Monorepo | pnpm workspaces |
+| Layer       | Technology                                |
+| ----------- | ----------------------------------------- |
+| Monorepo    | pnpm workspaces                           |
 | Olympia App | Next.js 14+ (App Router, TypeScript), PWA |
-| Info App | Vite, React |
-| Styling | Tailwind CSS |
-| Deployment | Docker + Caddy (automatic HTTPS) |
-| Node | LTS 20+ |
+| Info App    | Vite, React                               |
+| Styling     | Tailwind CSS                              |
+| Deployment  | Docker + Caddy (automatic HTTPS)          |
+| Node        | LTS 20+                                   |
 
 ---
 
@@ -60,8 +60,8 @@ pnpm format:check   # Check formatting
 
 GitHub Actions workflows are located in `.github/workflows/`:
 
-| Workflow | Trigger | Steps |
-|----------|---------|-------|
+| Workflow | Trigger         | Steps                                           |
+| -------- | --------------- | ----------------------------------------------- |
 | `ci.yml` | Push/PR to main | Lint → Type check → Test → Build → Docker build |
 
 The CI pipeline validates all apps and builds a test Docker image to catch issues early.
@@ -87,13 +87,13 @@ Internet
 
 **Port summary:**
 
-| Port | Direction | Purpose |
-|---|---|---|
-| 22 | inbound | SSH (admin access) |
-| 80 | inbound | HTTP → HTTPS redirect + ACME challenge |
-| 443 | inbound | HTTPS (public access) |
+| Port | Direction      | Purpose                                |
+| ---- | -------------- | -------------------------------------- |
+| 22   | inbound        | SSH (admin access)                     |
+| 80   | inbound        | HTTP → HTTPS redirect + ACME challenge |
+| 443  | inbound        | HTTPS (public access)                  |
 | 8081 | localhost only | Direct app access (admin / monitoring) |
-| 8081 | internal | App container listens here |
+| 8081 | internal       | App container listens here             |
 
 Caddy obtains and renews TLS certificates automatically via Let's Encrypt.
 
@@ -107,6 +107,7 @@ Caddy obtains and renews TLS certificates automatically via Let's Encrypt.
 - DNS A record for your domain pointing to your server IP
 
 Check:
+
 ```bash
 ssh -o BatchMode=yes root@your-server exit && echo "SSH OK"
 dig +short yourdomain.com  # should return your server IP
@@ -134,6 +135,7 @@ EMAIL="admin@yourdomain.com"      # For Let's Encrypt certificate
 ```
 
 Override any value via CLI without editing the file:
+
 ```bash
 ./install.sh --domain example.com --email admin@example.com
 ./install.sh --host root@other-server --key ~/.ssh/other_key
@@ -162,7 +164,7 @@ make setup
 4. On the server:
    - Install base packages + Docker Engine (official method)
    - Configure UFW firewall
-   - Generate `/opt/wahl-check/.env` automatically (no manual step)   - Build Docker image and start all containers
+   - Generate `/opt/wahl-check/.env` automatically (no manual step) - Build Docker image and start all containers
    - Install a systemd service for auto-restart on reboot
 5. Verify the app responds on localhost port 8081
 
@@ -220,11 +222,13 @@ Caddy handles TLS automatically:
 - HTTP is automatically redirected to HTTPS
 
 If HTTPS does not work after 60 seconds:
+
 ```bash
 ./logs.sh caddy   # Look for ACME errors
 ```
 
 Common causes:
+
 - DNS not yet pointing to the server
 - Port 80 not open in firewall (needed for ACME HTTP challenge)
 
@@ -235,6 +239,7 @@ Common causes:
 A systemd service (`wahl-check.service`) is installed during setup. After a server reboot, Docker and all containers start automatically. No manual intervention is needed.
 
 Check the service:
+
 ```bash
 ssh root@your-server "systemctl status wahl-check"
 ```
@@ -245,25 +250,27 @@ ssh root@your-server "systemctl status wahl-check"
 
 All content lives in `apps/olympia/content/` and is mounted read-only into the container:
 
-| File | What to edit |
-|---|---|
-| `content/site.json` | Site title, nav, hero text, footer |
-| `content/questions.json` | Quiz questions / theses |
-| `content/results.json` | Positions and their stances |
-| `content/faq.json` | General FAQ |
-| `content/info/overview.json` | Referendum facts |
-| `content/info/process.json` | Voting process steps |
-| `content/info/arguments.json` | Pro/Contra arguments |
-| `content/info/faq.json` | Info section FAQ |
-| `content/info/sources.json` | Source links |
+| File                          | What to edit                       |
+| ----------------------------- | ---------------------------------- |
+| `content/site.json`           | Site title, nav, hero text, footer |
+| `content/questions.json`      | Quiz questions / theses            |
+| `content/results.json`        | Positions and their stances        |
+| `content/faq.json`            | General FAQ                        |
+| `content/info/overview.json`  | Referendum facts                   |
+| `content/info/process.json`   | Voting process steps               |
+| `content/info/arguments.json` | Pro/Contra arguments               |
+| `content/info/faq.json`       | Info section FAQ                   |
+| `content/info/sources.json`   | Source links                       |
 
 To update content without rebuilding the container:
+
 ```bash
 rsync -az apps/olympia/content/ root@your-server:/opt/wahl-check/content/
 # No container restart needed (content is mounted live)
 ```
 
 To update code:
+
 ```bash
 ./deploy.sh  # Syncs + rebuilds
 ```
@@ -284,12 +291,14 @@ To update code:
 ### Troubleshooting
 
 **App does not start:**
+
 ```bash
 ./logs.sh app
 ssh root@your-server "cd /opt/wahl-check && docker compose ps"
 ```
 
 **HTTPS certificate not obtained:**
+
 ```bash
 ./logs.sh caddy
 # Check DNS: dig +short yourdomain.com
@@ -297,12 +306,14 @@ ssh root@your-server "cd /opt/wahl-check && docker compose ps"
 ```
 
 **Container not auto-starting after reboot:**
+
 ```bash
 ssh root@your-server "systemctl status wahl-check docker"
 ssh root@your-server "journalctl -u wahl-check -n 50"
 ```
 
 **Reset and redeploy from scratch:**
+
 ```bash
 ssh root@your-server "cd /opt/wahl-check && docker compose down -v"
 ./install.sh
@@ -312,17 +323,17 @@ ssh root@your-server "cd /opt/wahl-check && docker compose down -v"
 
 ## Architecture Decisions
 
-| Decision | Rationale |
-|---|---|
-| **pnpm workspaces** | Efficient monorepo management with shared dependencies |
-| **Next.js standalone output** | Smaller Docker image; no `node_modules` needed at runtime |
-| **Vite for info app** | Fast, lightweight build for static info site |
-| **Caddy over Nginx** | Automatic TLS renewal, single config file, no certbot needed |
-| **App on port 8081** | Avoids conflict with system services on 3000/8080; bound to localhost so public traffic still has to pass through Caddy |
-| **Content as mounted volume** | Content updates don't require container rebuild |
-| **No database server** | Content is static JSON; quiz answers stay in browser localStorage; analytics are persisted as a small JSON file in `/data` |
+| Decision                      | Rationale                                                                                                                     |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **pnpm workspaces**           | Efficient monorepo management with shared dependencies                                                                        |
+| **Next.js standalone output** | Smaller Docker image; no `node_modules` needed at runtime                                                                     |
+| **Vite for info app**         | Fast, lightweight build for static info site                                                                                  |
+| **Caddy over Nginx**          | Automatic TLS renewal, single config file, no certbot needed                                                                  |
+| **App on port 8081**          | Avoids conflict with system services on 3000/8080; bound to localhost so public traffic still has to pass through Caddy       |
+| **Content as mounted volume** | Content updates don't require container rebuild                                                                               |
+| **No database server**        | Content is static JSON; quiz answers stay in browser localStorage; analytics are persisted as a small JSON file in `/data`    |
 | **`deploy.conf` over `.env`** | Single source of truth for both local scripts and documentation; `.env` is generated server-side; `deploy.conf` is gitignored |
-| **Systemd service** | Ensures containers restart after reboot without depending on Docker restart policies alone |
+| **Systemd service**           | Ensures containers restart after reboot without depending on Docker restart policies alone                                    |
 
 ---
 
