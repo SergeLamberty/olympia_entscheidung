@@ -27,7 +27,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const existingCookie = cookieStore.get(ANALYTICS_COOKIE_NAME);
   const visitorCookie = existingCookie ?? buildVisitorCookie();
 
