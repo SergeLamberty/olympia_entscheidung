@@ -2583,7 +2583,6 @@ packages:
       {
         integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==,
       }
-    deprecated: Use your platform's native atob() and btoa() methods instead
 
   acorn-globals@7.0.1:
     resolution:
@@ -3277,7 +3276,6 @@ packages:
         integrity: sha512-Adz2bdH0Vq3F53KEMJOoftQFutWCukm6J24wbPWRO4k1kMY7gS7ds/uoJkNuV8wDCtWWnuwGcJwpWcih+zEW1Q==,
       }
     engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
-    hasBin: true
 
   create-require@1.1.1:
     resolution:
@@ -3527,7 +3525,6 @@ packages:
         integrity: sha512-A2is4PLG+eeSfoTMA95/s4pvAoSo2mKtiM5jlHkAVewmiO8ISFTFKZjH7UAM1Atli/OT/7JHOrJRJiMKUZKYBw==,
       }
     engines: { node: ">=12" }
-    deprecated: Use your platform's native DOMException instead
 
   dunder-proto@1.0.1:
     resolution:
@@ -3691,7 +3688,6 @@ packages:
         integrity: sha512-2NlIDTwUWJN0mRPQOdtQBzbUHvdGY2P1VXSyU83Q3xKxM7WHX2Ql8dKq782Q9TgQUNOLEzEYu9bzLNj1q88I5w==,
       }
     engines: { node: ">=6.0" }
-    hasBin: true
 
   eslint-config-prettier@9.1.2:
     resolution:
@@ -3751,7 +3747,6 @@ packages:
         integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==,
       }
     engines: { node: ">=4" }
-    hasBin: true
 
   esquery@1.7.0:
     resolution:
@@ -4255,7 +4250,6 @@ packages:
         integrity: sha512-2SPlun1JUPWoM6t3F0dw0FkCF/jWY8kttcY4f599GLTSjh2OCuuhdTkJQsEcZzBqbXZGKMK2OqW1oZsjtf/gQA==,
       }
     engines: { node: ">=8" }
-    hasBin: true
 
   imurmurhash@0.1.4:
     resolution:
@@ -4648,7 +4642,6 @@ packages:
         integrity: sha512-OVVobw2IubN/GSYsxETi+gOe7Ka59EFMR/twOU3Jb2GnKKeMGJB5SGUUrEz3SFVmJASUdZUzy83sLNNQ2gZslg==,
       }
     engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
-    hasBin: true
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
@@ -4882,7 +4875,6 @@ packages:
         integrity: sha512-NIy3oAFp9shda19hy4HK0HRTWKtPJmGdnvywu01nOqNC2vZg+Z+fvJDxpMQA88eb2I9EcafcdjYgsDthnYTvGw==,
       }
     engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
-    hasBin: true
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
     peerDependenciesMeta:
@@ -4906,7 +4898,6 @@ packages:
       {
         integrity: sha512-PMSmkqxr106Xa156c2M265Z+FTrPl+oxd/rgOQy2tijQeK5TxQ43psO1ZCwhVOSdnn+RzkzlRz/eY4BgJBYVpg==,
       }
-    hasBin: true
 
   js-yaml@4.1.1:
     resolution:
@@ -6868,7 +6859,6 @@ packages:
         integrity: sha512-p41ogyeMUrw3jWclHWTQg1k05DSVXPLcVxRTYsXUk+ZooOCZLcoYgPZ/HL/D/N+uQPOtcp1me1WhBEaX02mhWg==,
       }
     engines: { node: ">=12" }
-    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@3.0.0:
     resolution:

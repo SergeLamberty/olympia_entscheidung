@@ -10,9 +10,8 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   output: "standalone",
   reactStrictMode: true,
-  experimental: {
-    typedRoutes: false,
-  },
+  // Empty turbopack config to allow build with next-pwa's webpack config
+  turbopack: {},
 };
 
 module.exports = withPWA(nextConfig);
