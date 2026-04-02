@@ -34,16 +34,16 @@ RUN adduser --system --uid 1001 nextjs
 RUN apk add --no-cache wget
 RUN mkdir -p /data && chown nextjs:nodejs /data
 
-COPY --from=builder /app/apps/olympia/public ./public
+# Standalone output preserves the monorepo structure (apps/olympia/server.js)
 COPY --from=builder --chown=nextjs:nodejs /app/apps/olympia/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/olympia/.next/static ./.next/static
-COPY --from=builder /app/apps/olympia/content ./content
-COPY --from=deps --chown=nextjs:nodejs /app/node_modules/.pnpm /app/node_modules/.pnpm
-RUN ln -s /app/node_modules /node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/apps/olympia/.next/static ./apps/olympia/.next/static
+COPY --from=builder /app/apps/olympia/public ./apps/olympia/public
+COPY --from=builder /app/apps/olympia/content ./apps/olympia/content
 
 USER nextjs
 # PORT is set via docker-compose environment (default 8081 in production)
 EXPOSE 8081
 ENV PORT 8081
 ENV HOSTNAME "0.0.0.0"
+WORKDIR /app/apps/olympia
 CMD ["node", "server.js"]
