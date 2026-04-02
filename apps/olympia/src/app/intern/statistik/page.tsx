@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { getAnalyticsStats } from "@/lib/analytics";
 
@@ -17,6 +18,9 @@ function formatValue(value: number | null, suffix = ""): string {
 }
 
 export default async function StatistikPage() {
+  if (process.env.INTERNAL_STATS_ENABLED !== "true") {
+    notFound();
+  }
   const stats = await getAnalyticsStats();
 
   return (

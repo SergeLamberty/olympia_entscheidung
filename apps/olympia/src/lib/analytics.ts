@@ -95,7 +95,7 @@ async function withStoreLock<T>(mutate: (store: AnalyticsStore) => Promise<T> | 
   return operation;
 }
 
-export async function trackVisit(visitorId: string) {
+export async function trackVisit(visitorId: string, maxVisitors = 100_000) {
   await withStoreLock((store) => {
     const now = new Date().toISOString();
     const existing = store.uniqueVisitors[visitorId];
@@ -106,6 +106,8 @@ export async function trackVisit(visitorId: string) {
       return;
     }
 
+    if (Object.keys(store.uniqueVisitors).length >= maxVisitors) return;
+
     store.uniqueVisitors[visitorId] = {
       firstSeenAt: now,
       lastSeenAt: now,
@@ -114,11 +116,12 @@ export async function trackVisit(visitorId: string) {
   });
 }
 
-export async function trackCompletion(visitorId: string, score: number) {
+export async function trackCompletion(visitorId: string, score: number, maxVisitors = 100_000) {
   await withStoreLock((store) => {
     const now = new Date().toISOString();
 
     if (!store.uniqueVisitors[visitorId]) {
+      if (Object.keys(store.uniqueVisitors).length >= maxVisitors) return;
       store.uniqueVisitors[visitorId] = {
         firstSeenAt: now,
         lastSeenAt: now,
