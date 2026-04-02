@@ -57,6 +57,78 @@
       "url": "https://olympiabewerbung.nrw/dein-ja-zaehlt",
       "type": "official",
       "accessedAt": "2026-03-25"
+    },
+    {
+      "id": "src-paris-legacy",
+      "title": "Paris 2024 Legacy Report",
+      "description": "Offizieller Bericht zu den Hinterlassenschaften der Olympischen und Paralympischen Spiele Paris 2024, inkl. Nachhaltigkeitskonzept und Nachnutzungsplanung.",
+      "url": "https://olympics.com/ioc/paris-2024-legacy",
+      "type": "report",
+      "accessedAt": "2026-03-28"
+    },
+    {
+      "id": "src-paris-carbon",
+      "title": "Paris 2024 – CO₂-Bilanz",
+      "description": "Analyse zum CO₂-Fußabdruck der Spiele Paris 2024 (ca. 2 Mt CO₂-Äquivalent) im Vergleich zu früheren Austragungen.",
+      "url": "https://olympics.com/ioc/news/paris-2024-carbon-footprint",
+      "type": "report",
+      "accessedAt": "2026-03-28"
+    },
+    {
+      "id": "src-paris-economic",
+      "title": "Paris 2024 – Wirtschaftliche Auswirkungen",
+      "description": "Studie zu den ökonomischen Effekten der Spiele: Event-Budget von ca. 3 Mrd. €, Infrastruktur ca. 3,6 Mrd. €, BIP-Effekt ca. 0,07%.",
+      "url": "https://www.sportresolutions.com/paris-2024-economic-impact",
+      "type": "study",
+      "accessedAt": "2026-03-28"
+    },
+    {
+      "id": "src-mdr-bewerbungskosten",
+      "title": "MDR – Olympia-Bewerbung ist eine Millioneninvestition",
+      "description": "Medienbericht zu den Bewerbungskosten der vier deutschen Bewerberstädte (gemeinsam ca. 50 Mio. € für die nationale Vorauswahlphase).",
+      "url": "https://www.mdr.de/nachrichten/deutschland/wirtschaft/olympia-bewerbung-kosten-100.html",
+      "type": "media",
+      "accessedAt": "2026-03-27"
+    },
+    {
+      "id": "src-rechnungshof-hamburg",
+      "title": "Rechnungshof Hamburg – Beratende Äußerung 2015",
+      "description": "Analyse des Hamburger Rechnungshofs zu Kostenrisiken der Olympia-Bewerbung 2015. Warnung vor 'erheblichen Planungs- und Kostensteigerungsrisiken'. Bewerbungsbudget bis 15 Mio. €, Sanierungsstau 4,7 Mrd. €.",
+      "url": "https://www.hamburg.de/resource/blob/246228/9df3897982be73d249b983da69279c61/beratendeaeusserung-2015-olympia-pdf-data.pdf",
+      "type": "document",
+      "accessedAt": "2026-03-28"
+    },
+    {
+      "id": "src-tokyo-audit",
+      "title": "Board of Audit Japan – Prüfbericht Tokyo 2020",
+      "description": "Prüfbericht des japanischen Rechnungshofs zu den Kosten der Olympischen Spiele Tokyo 2020 (berichtet via ESPN, Dezember 2022). Zeigt Kostentrend: 1,7 Mrd. € (2008) → 3,2 Mrd. € (2024) nur für die Ausrichtung.",
+      "url": "https://www.espn.com/olympics/story/_/id/35303667/",
+      "type": "document",
+      "accessedAt": "2026-03-28"
+    },
+    {
+      "id": "src-airbnb-paris",
+      "title": "Airbnb – Buchungen Paris 2024",
+      "description": "Pressemitteilung von Airbnb: Buchungen in der Region Paris während der Spiele +400% im Vergleich zum Vorjahr, Angebote +40%. Durchschnittliche Einnahmen ca. 2.000 € pro Gastgeber.",
+      "url": "https://news.airbnb.com/bookings-in-the-paris-region-during-the-olympic-games-up-400/",
+      "type": "media",
+      "accessedAt": "2026-03-28"
+    },
+    {
+      "id": "src-rat-sicherheitskosten",
+      "title": "Ratsanfrage RAT/038/2026 – Sicherheitskosten",
+      "description": "Anfrage der Fraktion Die Linke im Rat der Stadt Düsseldorf (Februar 2026). Die Stadt antwortete, dass zum jetzigen Zeitpunkt keine seriöse Angabe zu den Sicherheitskosten gemacht werden kann.",
+      "url": "https://www.duesseldorf.de/rat/buergerinfo",
+      "type": "document",
+      "accessedAt": "2026-03-28"
+    },
+    {
+      "id": "src-buergerfragen",
+      "title": "Bürgerfragen-Plattform – Düsseldorf Marketing",
+      "description": "Plattform für Bürgerfragen zur Olympia-Bewerbung, betrieben von Düsseldorf Marketing als Teil der Kampagne 'Unsere Städte. Unsere Spiele.'",
+      "url": "https://stadtgestalten.duesseldorf-marketing.de",
+      "type": "official",
+      "accessedAt": "2026-03-28"
     }
   ]
 }

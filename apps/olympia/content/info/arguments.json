@@ -24,6 +24,21 @@
         "id": "pro-4",
         "text": "Befürworter argumentieren, dass die internationale Sichtbarkeit der Region langfristige wirtschaftliche und touristische Effekte erzeugen könnte.",
         "sourceRef": "Öffentliche Debatte"
+      },
+      {
+        "id": "pro-5",
+        "text": "Paris 2024 zeigt laut Befürwortern, dass nachhaltige Spiele möglich sind: 95% der Sportstätten existierten bereits, das olympische Dorf soll zu 100% in Wohnungen umgewandelt werden.",
+        "sourceRef": "Paris 2024 Legacy Report"
+      },
+      {
+        "id": "pro-6",
+        "text": "Bei Paris 2024 konnten 37% des öffentlichen Auftragsvolumens an kleine und mittlere Unternehmen (KMU) vergeben werden – unterstützt durch eine eigens geschaffene Plattform.",
+        "sourceRef": "Paris 2024 Legacy Report"
+      },
+      {
+        "id": "pro-7",
+        "text": "Die Anpassungen für die Paralympischen Spiele führen zu inklusionsgerechten Sportstätten, die langfristig allen zugutekommen.",
+        "sourceRef": "Öffentliche Debatte"
       }
     ]
   },
@@ -48,6 +63,41 @@
       {
         "id": "con-4",
         "text": "Manche Kritiker sehen die Ressourcen besser in dringenden kommunalen Aufgaben wie Schulen, ÖPNV oder Klimaschutz investiert.",
+        "sourceRef": "Öffentliche Debatte"
+      },
+      {
+        "id": "con-5",
+        "text": "Paris 2024 zeigt trotz Nachhaltigkeitskonzept: Event-Kosten ca. 3 Mrd. €, Infrastruktur ca. 3,6 Mrd. € – eine Budgetüberschreitung von fast 10%. Der BIP-Effekt lag bei nur ca. 0,07%.",
+        "sourceRef": "Sport Resolutions / Paris 2024"
+      },
+      {
+        "id": "con-6",
+        "text": "Der Rechnungshof Hamburg warnte 2015 vor 'erheblichen Planungs- und Kostensteigerungsrisiken'. Die Bewerbung wurde nach dem Volksentscheid abgebrochen.",
+        "sourceRef": "Rechnungshof Hamburg 2015"
+      },
+      {
+        "id": "con-7",
+        "text": "Der Kostentrend für olympische Sommerspiele ist steigend: von ca. 1,7 Mrd. € (2008) auf ca. 3,2 Mrd. € (2024) – nur für die Ausrichtung, ohne Infrastruktur.",
+        "sourceRef": "Board of Audit Japan / ESPN"
+      },
+      {
+        "id": "con-8",
+        "text": "Paris 2024 führte zu einem Anstieg der Airbnb-Angebote um 40%, Buchungen stiegen um 400%. Dies verschärfte die angespannte Wohnsituation und trieb die Mieten in die Höhe.",
+        "sourceRef": "Airbnb News"
+      },
+      {
+        "id": "con-9",
+        "text": "Die Stadt Düsseldorf antwortete auf eine Ratsanfrage (RAT/038/2026), dass sie zum jetzigen Zeitpunkt keine seriöse Angabe zu den Sicherheitskosten machen kann.",
+        "sourceRef": "Ratsanfrage Die Linke, Feb. 2026"
+      },
+      {
+        "id": "con-10",
+        "text": "Die vier deutschen Bewerberstädte planen gemeinsam ca. 50 Mio. € allein für die nationale Vorauswahlphase ein. Die Gesamtkosten einer Bewerbung werden auf 50-100 Mio. € geschätzt.",
+        "sourceRef": "MDR Aktuell, 27.03.2026"
+      },
+      {
+        "id": "con-11",
+        "text": "Der städtische Haushalt ist bereits angespannt: Kirchentag 2027, Brückensanierungen und neue Oper stellen erhebliche finanzielle Herausforderungen dar.",
         "sourceRef": "Öffentliche Debatte"
       }
     ]
